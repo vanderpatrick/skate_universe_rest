@@ -9,8 +9,6 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_profile_qdjgyp', blank=True)
 
-    video = models.FileField(upload_to='videos/',null=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
