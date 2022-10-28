@@ -23,6 +23,7 @@ class PostSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'image height larger than 4096px'
             )
+        return value
 
     def get_is_author(self, obj):
         request = self.context['request']
