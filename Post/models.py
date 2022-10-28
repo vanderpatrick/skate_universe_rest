@@ -18,7 +18,7 @@ class Post(models.Model):
         upload_to='images/', default='../default_profile_qdjgyp', blank=True)
 
     post_category_filter = models.CharField(
-        max_length=50, choices=post_categorys, default='gaps'
+        max_length=50, choices=post_categorys, default='normal'
     )
 
     video = CloudinaryField(resource_type="video", default='../default_VID')
