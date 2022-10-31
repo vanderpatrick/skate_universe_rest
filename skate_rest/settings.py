@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['skate_rest.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['skate-universe-django-rest.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -89,8 +89,8 @@ if 'DEV' not in os.environ:
 
 
 REST_USE_JWT = True
-JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = 'my-app-auth'
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'skate_rest.serializers.CurrentUserSerializer'}
@@ -119,7 +119,6 @@ else:
 CORS_ALLOW_CREDENTIALS = True
 
 JWT_AUTH_SAMESITE = 'None'
-
 
 
 ROOT_URLCONF = 'skate_rest.urls'
