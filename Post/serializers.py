@@ -2,7 +2,7 @@ from rest_framework import serializers
 from Post.models import Post
 from Like.models import Like
 from dislike.models import Dislike
-
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
@@ -15,6 +15,14 @@ class PostSerializer(serializers.ModelSerializer):
     comments_count = serializers.ReadOnlyField()
     likes_count = serializers.ReadOnlyField()
     dislikes_count = serializers.ReadOnlyField()
+    created_at = serializers.SerializerMethodField()
+    updated_at = serializers.SerializerMethodField()
+
+    def get_created_at(self, obj):
+        return naturaltime(obj.created_at)
+    
+    def get_updated_at(self, obj):
+        return naturaltime(obj.updated_at)
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
