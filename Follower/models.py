@@ -7,7 +7,6 @@ class Follower(models.Model):
         User, on_delete=models.CASCADE, related_name='following')
     followed = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='followed')
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -15,4 +14,4 @@ class Follower(models.Model):
         unique_together = ['author', 'followed']
 
     def __str__(self):
-        return f"{self.author} has followed {self.followed}"
+        return F"{self.owner} {self.followed}"
