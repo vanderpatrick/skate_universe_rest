@@ -7,6 +7,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     is_author = serializers.SerializerMethodField()
     following_id = serializers.SerializerMethodField()
+    posts_count = serializers.ReadOnlyField()
+    following_count = serializers.ReadOnlyField()
+    followers_count = serializers.ReadOnlyField()
 
     def get_is_author(self, obj):
         request = self.context['request']
@@ -25,5 +28,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
             'id', 'author', 'created_at', 'updated_at',
-            'name', 'image', 'bio', 'is_author', 'following_id'
+            'name', 'image', 'bio', 'is_author', 'following_id', 'posts_count',
+            'following_count', 'followers_count'
         ]
