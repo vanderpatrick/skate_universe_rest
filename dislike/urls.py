@@ -4,5 +4,5 @@ from dislike import views
 
 urlpatterns = [
     path('dislikes/', views.DislikeListView.as_view()),
-    path('profiles/<int:pk>/', views.DislikeDetailView.as_view()),
+    path('dislikes/<int:pk>/', views.DislikeDetailView.as_view()),
 ]

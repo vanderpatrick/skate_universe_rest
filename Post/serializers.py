@@ -12,6 +12,9 @@ class PostSerializer(serializers.ModelSerializer):
         source='author.profile.image.url')
     like_id = serializers.SerializerMethodField()
     dislike_id = serializers.SerializerMethodField()
+    comments_count = serializers.ReadOnlyField()
+    likes_count = serializers.ReadOnlyField()
+    dislikes_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -56,5 +59,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'author', 'is_author', 'profile_id', 'profile_image',
             'content', 'created_at', 'updated_at',
-            'post_category_filter', 'image', 'like_id', 'dislike_id'
+            'post_category_filter', 'image', 'like_id', 'dislike_id',
+            'likes_count', 'comments_count', 'dislikes_count'
         ]
