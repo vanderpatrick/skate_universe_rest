@@ -3,7 +3,7 @@ from .models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='owner.username')
+    author = serializers.ReadOnlyField(source='author.username')
     is_author = serializers.SerializerMethodField()
 
     def get_is_author(self, obj):
