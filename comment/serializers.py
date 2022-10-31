@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Comment
+from django.contrib.humanize.templatetags.humanize import naturaltime
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -9,6 +10,8 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(
         source='author.profile.image.url'
     )
+    created_at = serializers.SerializerMethodField()
+    updated_at = serializers.SerializerMethodField()
 
     def get_is_author(self, obj):
         request = self.context['request']
@@ -20,6 +23,12 @@ class CommentSerializer(serializers.ModelSerializer):
             'id', 'author', 'is_author', 'profile_id', 'profile_image',
             'post', 'created_at', 'updated_at', 'content'
         ]
+
+    def get_created_at(self, obj):
+        return naturaltime(obj.created_at)
+
+    def get_updated_at(self, obj):
+        return naturaltime(obj.updated_at)
 
 
 class CommentDetailSerializer(CommentSerializer):
