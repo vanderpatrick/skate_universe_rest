@@ -3,6 +3,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 from skate_rest.permissions import IsOwnerOrReadOnly
 from django.db.models import Count
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ProfileListView(generics.ListAPIView):
@@ -13,7 +14,8 @@ class ProfileListView(generics.ListAPIView):
         following_count=Count('author__following', distinct=True),
     ).order_by('-created_at')
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        DjangoFilterBackend
     ]
     ordering_fields = [
         'posts_count',
@@ -21,6 +23,9 @@ class ProfileListView(generics.ListAPIView):
         'following_count',
         'author__following__created_at',
         'author__followed__created_at',
+    ]
+    filterset_fields = [
+        'author__following__followed__profile'
     ]
 
 

@@ -1,6 +1,7 @@
 from rest_framework import permissions, generics, filters
 from .models import Post
 from .serializers import PostSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 from skate_rest.permissions import IsOwnerOrReadOnly
 from django.db.models import Count
 # Create your views here.
@@ -16,7 +17,8 @@ class PostListView(generics.ListCreateAPIView):
     ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
-        filters.SearchFilter
+        filters.SearchFilter,
+        DjangoFilterBackend
     ]
     ordering_fields = [
         'likes_count',
@@ -24,6 +26,13 @@ class PostListView(generics.ListCreateAPIView):
         'dislikes_count',
         'likes__created_at',
     ]
+    filterset_fields = [
+        'author__followed__author__profile',
+        'likes__author__profile',
+        'author__profile',
+        'post_category_filter'
+    ]
+
     search_fields = [
         'author__username',
         'title', 'post_category_filter'
