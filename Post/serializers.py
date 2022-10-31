@@ -18,7 +18,7 @@ class PostSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'image width larger than 4096px'
             )
-        
+
         if value.image.height > 4096:
             raise serializers.ValidationError(
                 'image height larger than 4096px'
