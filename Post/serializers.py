@@ -4,6 +4,7 @@ from Like.models import Like
 from dislike.models import Dislike
 from django.contrib.humanize.templatetags.humanize import naturaltime
 
+
 class PostSerializer(serializers.ModelSerializer):
     author = serializers.ReadOnlyField(source='author.username')
     is_author = serializers.SerializerMethodField()
@@ -20,7 +21,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_created_at(self, obj):
         return naturaltime(obj.created_at)
-    
+
     def get_updated_at(self, obj):
         return naturaltime(obj.updated_at)
 
