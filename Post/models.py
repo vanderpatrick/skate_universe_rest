@@ -21,8 +21,6 @@ class Post(models.Model):
         max_length=50, choices=post_categorys, default='normal'
     )
 
-    video = CloudinaryField(resource_type="video", default='../default_VID')
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
