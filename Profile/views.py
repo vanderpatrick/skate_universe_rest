@@ -19,8 +19,8 @@ class ProfileListView(generics.ListAPIView):
         'posts_count',
         'followers_count',
         'following_count',
-        'owner__following__created_at',
-        'owner__followed__created_at',
+        'author__following__created_at',
+        'author__followed__created_at',
     ]
 
 
