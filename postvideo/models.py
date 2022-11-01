@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import VideoMediaCloudinaryStorage
+from cloudinary_storage.validators import validate_video
 
 post_categorys = [
     ('gaps', 'Gaps'),
@@ -15,7 +17,8 @@ class VideoPost(models.Model):
     content = models.TextField(blank=True)
     video = models.FileField(
         upload_to='videos/',
-        null=True)
+        blank=True, storage=VideoMediaCloudinaryStorage(),
+        validators=[validate_video])
     post_categorys_filter = models.CharField(
         max_length=50, choices=post_categorys, default='normal'
     )

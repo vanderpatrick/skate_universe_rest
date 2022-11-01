@@ -14,8 +14,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100, blank=True)
     content = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_profile_qdjgyp', blank=True)
-
+        upload_to='media', default='../default_profile_qdjgyp',
+        blank=True, null=True)
     post_category_filter = models.CharField(
         max_length=50, choices=post_categorys, default='normal'
     )
